@@ -8,7 +8,7 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(decoration: InputDecoration(
-      enabledBorder:U,
+
     ),);
   }
 }
