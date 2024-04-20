@@ -40,6 +40,7 @@ dependencies:
   flutter_timeline_calendar: ^1.0.9
   pocketbase: ^0.18.1
   rive:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:
