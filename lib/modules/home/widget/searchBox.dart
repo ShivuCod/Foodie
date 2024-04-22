@@ -7,8 +7,31 @@ class SearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(decoration: InputDecoration(
-
-    ),);
+    return TextField(
+      decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              gapPadding: 1.0,
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.transparent)),
+          errorBorder: OutlineInputBorder(
+              gapPadding: 1.0,
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.transparent)),
+          focusedBorder: OutlineInputBorder(
+              gapPadding: 1,
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.transparent)),
+          disabledBorder: OutlineInputBorder(
+              gapPadding: 1,
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.transparent)),
+          focusedErrorBorder: OutlineInputBorder(
+              gapPadding: 1,
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(color: Colors.transparent)),
+          fillColor: Colors.grey.shade200,
+          filled: true,
+          suffixIcon: Icon(Icons.search,color: Colors.grey,)),
+    );
   }
 }
