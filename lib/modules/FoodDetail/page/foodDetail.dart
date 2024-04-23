@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_ordering/modules/AddtoCard/page/AddtoCard.dart';
+import 'package:food_ordering/modules/add_to_card/page/add_to_card.dart';
 import 'package:food_ordering/utils/constant.dart';
 
+import '../../add_to_card/providers/addCard_provider.dart';
+import '../../home/providers/foodProvider.dart';
 import '../model/food.dart';
 
 final qty = StateProvider((ref) => 0);
 
 class FoodDetail extends ConsumerWidget {
-  const FoodDetail({super.key, required this.food});
-  final Food food;
+  const FoodDetail({super.key, this.food});
+  final Food? food;
   static const String routerName = '/foodDetail';
 
   @override
@@ -38,16 +40,16 @@ class FoodDetail extends ConsumerWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(food.img, height: 300),
+                    Image.asset(food!.img, height: 300),
                     Text(
-                      food.location,
+                      food!.location,
                       style: const TextStyle(fontSize: 20),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          food.name,
+                          food!.name,
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w600),
                         ),
@@ -93,8 +95,8 @@ class FoodDetail extends ConsumerWidget {
                           fontSize: 12, letterSpacing: 1, color: Colors.grey),
                     ),
                     verticalBox(10),
-                    Text("₹ ${food.price.toString()}",
-                        style: TextStyle(
+                    Text("₹ ${food!.price.toString()}",
+                        style: const TextStyle(
                             fontSize: 24,
                             color: Colors.black,
                             fontWeight: FontWeight.w500)),
@@ -122,7 +124,7 @@ class FoodDetail extends ConsumerWidget {
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     Text(
-                      food.ingredients,
+                      food!.ingredients,
                       style: const TextStyle(fontSize: 14, letterSpacing: 1),
                     ),
                   ])),
@@ -132,42 +134,42 @@ class FoodDetail extends ConsumerWidget {
             shadowColor: Colors.transparent,
             elevation: 0,
             height: 100,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             notchMargin: 0,
             child: Row(
               children: [
                 Expanded(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 50),
+                            minimumSize: const Size(double.infinity, 50),
                             backgroundColor: Colors.black,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16))),
                         onPressed: () {
                           ref.read(mycard.notifier).state.add(Food(
-                              name: food.name,
-                              ingredients: food.ingredients,
-                              img: food.img,
-                              price: food.price,
-                              location: food.location,
-                              description: food.description,
+                              name: food!.name,
+                              ingredients: food!.ingredients,
+                              img: food!.img,
+                              price: food!.price,
+                              location: food!.location,
+                              description: food!.description,
                               qty: ref.watch(qty)));
                           showToast("Added", context);
                         },
-                        child: Text("Add To Card"))),
+                        child: const Text("Add To Card"))),
                 horizontalBox(20),
                 Expanded(
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(double.infinity, 50),
+                          minimumSize: const Size(double.infinity, 50),
                           backgroundColor: Colors.white,
                           foregroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
-                              side: BorderSide(color: Colors.black))),
+                              side: const BorderSide(color: Colors.black))),
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         "Buy Now",
                         style: TextStyle(
                             fontSize: 14,

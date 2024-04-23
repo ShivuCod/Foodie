@@ -22,7 +22,7 @@ class Food {
       name: json['name'],
       ingredients: json['ingredients'],
       img: json['img'],
-      price: json['price'],
+      price: double.parse( json['price'].toString()),
       location: json['location'],
       description: json['description'],
       qty: json['qty']

@@ -2,18 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_ordering/modules/AddtoCard/widget/item.dart';
+import 'package:food_ordering/modules/add_to_card/widget/item.dart';
 
-import '../../../utils/constant.dart';
-import '../../FoodDetail/model/food.dart';
+import '../../home/providers/foodProvider.dart';
+import '../providers/addCard_provider.dart';
 
-final mycard = StateProvider<List>((ref) => []);
+
 
 class AddToCard extends ConsumerWidget {
   const AddToCard({super.key});
   static const String routerName = '/addToCard';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final list = ref.watch(mycard);
     return Scaffold(
       appBar: AppBar(
@@ -32,13 +33,21 @@ class AddToCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Column(
-              children: List.generate(list.length, (index) {
-
-               return ItemCard(food: list[index]);
-              }),
-            ),
-            Divider(),
+            list.isEmpty
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child:const Center(
+                      child: Text(
+                        "Food Not Added",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ))
+                : Column(
+                    children: List.generate(list.length, (index) {
+                      return ItemCard(food: list[index]);
+                    }),
+                  ),
+            const Divider(),
             // Padding(
             //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
             //   child: Row(

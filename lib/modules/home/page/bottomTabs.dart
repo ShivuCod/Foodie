@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_ordering/modules/AddtoCard/page/AddtoCard.dart';
+import 'package:food_ordering/modules/add_to_card/page/add_to_card.dart';
 import 'package:food_ordering/modules/home/page/home.dart';
 import 'package:food_ordering/modules/profile/page/profile.dart';
 

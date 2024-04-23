@@ -54,8 +54,21 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
             ),
-         Positioned(top: 1,child: Image.asset(img, height: 120, width:150),)
-          ],
+            Positioned(
+              top: 1,
+              child: Image.network(
+                "http://10.0.2.2:8090/api/files/27bnfpkbyczi51t/9tuwoe108x1spjx/$img",
+                height: 120,
+                width: 150,
+                errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                return Image.asset(
+                    'assets/burger.png',
+                    height: 120,
+                    width: 150,
+                  );
+                },
+              ),
+            )          ],
         ),
       ),
     );

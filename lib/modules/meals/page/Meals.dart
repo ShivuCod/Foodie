@@ -32,7 +32,7 @@ static const String routerName = '/meals';
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  IconBox(iconData: FontAwesomeIcons.burger),
+                  IconBox(iconData: FontAwesomeIcons.burger,currentTab: 1,),
                   IconBox(iconData: FontAwesomeIcons.mugHot),
                   IconBox(iconData: FontAwesomeIcons.champagneGlasses),
                   IconBox(iconData: FontAwesomeIcons.bowlRice),

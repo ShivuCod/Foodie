@@ -42,6 +42,7 @@ dependencies:
   rive:
   path_provider:
   font_awesome_flutter:
+  dio:
 
 dev_dependencies:
   flutter_test:

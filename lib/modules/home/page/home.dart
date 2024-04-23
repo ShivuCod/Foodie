@@ -2,23 +2,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering/modules/FoodDetail/page/foodDetail.dart';
+import 'package:food_ordering/modules/home/providers/foodProvider.dart';
+import 'package:food_ordering/modules/home/sevices/home_service.dart';
 
 import 'package:food_ordering/modules/home/widget/foodCard.dart';
 import 'package:food_ordering/modules/home/widget/searchBox.dart';
 import 'package:food_ordering/utils/constant.dart';
 import 'package:food_ordering/utils/theme.dart';
 
+import '../../FoodDetail/model/food.dart';
 
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   static const String routerName = '/home';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final foodLt= ref.watch(foodList);
+    
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -32,6 +39,7 @@ class HomePage extends StatelessWidget {
           "Home",
           style: TextStyle(fontSize: 18, color: Colors.black),
         ),
+        actions: [IconButton(onPressed: ()=>HomeService().getData(), icon: Icon(FontAwesomeIcons.magnifyingGlass))],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -62,24 +70,28 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Colors.black87),
               ),
               verticalBox(10),
+              Consumer(builder: (_,ref,child){
+               return ref.watch(foodList).when(data: (food)=> Wrap(
+                   alignment: WrapAlignment.center,
+                   runAlignment: WrapAlignment.center,
+                   spacing: 12,
+                   runSpacing: 12,
+               children:List.generate(food.length, (index) =>  FoodCard(
+                   img: food[index].img!,
+                   title:food[index].name! ,
+                   subTitle: food[index].location!,
+                   price: double.parse(food[index].price!.toString()),
+                   onPressed:()=> Navigator.pushNamed(context, FoodDetail.routerName))),),
+                    error: (error, _) => const Center(child: Text('No Patients'),),
+                    loading: () => const Center(child: CircularProgressIndicator()));
+
+              }) ,
                Wrap(
                 alignment: WrapAlignment.center,
                 runAlignment: WrapAlignment.center,
                 spacing: 12,
                 runSpacing: 12,
-                children: [
-                  FoodCard(
-                      img: "assets/burger.png",
-                      title: "Cheese Burger",
-                      subTitle: "Food Mohola",
-                      price: 89.0,
-                  onPressed:()=> Navigator.pushNamed(context, FoodDetail.routerName)),
-                  FoodCard(
-                      img: "assets/biryani.png",
-                      title: "Cheese Burger",
-                      subTitle: "Food Mohola",
-                      price: 246.0,
-                   onPressed:()=> Navigator.pushNamed(context, FoodDetail.routerName)),
+                children:[
                   FoodCard(
                       img: "assets/Doner_kebab.png",
                       title: "Cheese Burger",
@@ -104,7 +116,7 @@ class HomePage extends StatelessWidget {
                     subTitle: "Food Mohola",
                     price: 239.0,
                     onPressed:()=> Navigator.pushNamed(context, FoodDetail.routerName)),
-                  
+
                 ],
               )
             ],
